@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "api": "^5.0.5",
     "canvas": "^3.1.0",
-    "express": "^4.21.2"
-  }
+    "express": "^4.21.2",
+    "public": "^0.1.4"
+  },
+  "main": "api/getTax.js",
+  "version": "1.0.0"
 }
