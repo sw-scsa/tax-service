@@ -1,24 +1,23 @@
-const express = require('express');
-const { createCanvas } = require('canvas'); // Install canvas: npm install canvas
+import { createCanvas } from 'canvas'; // ES module import
 
-const app = express();
-const PORT = 3000; // Port to run the server
+export default function handler(req, res) {
 
-app.get('/getTax', (req, res) => {
+    console.log("ASDFASD")
     const cc = req.query.countryCode;
+    const fs = req.query.fontSize | 12;
 
     if(!cc) {
         cc = "NOT"
     }
-
+    console.log("ASDF")
     
-    cc_tax_mapping = {
+    let cc_tax_mapping = {
         "sk": "20",
         "si": "22",
         "hr": "25"
     }
 
-    tax = cc_tax_mapping[cc.toLowerCase()]
+    let tax = cc_tax_mapping[cc.toLowerCase()]
 
     console.log(cc)
     console.log(tax)
@@ -31,7 +30,7 @@ app.get('/getTax', (req, res) => {
 
     const text = `incl. ${tax}% VAT.`;
 
-    const fontSize = 15; // Font size in pixels
+    const fontSize = fs; // Font size in pixels
 
     // Temporary canvas to measure text size
     const tempCanvas = createCanvas(1, 1);
@@ -59,9 +58,4 @@ app.get('/getTax', (req, res) => {
 
     // Stream the image back as a response
     canvas.createPNGStream().pipe(res);
-});
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Get-TAX running at http://localhost:${PORT}/getTax?countryCode=SK`);
-});
+}
