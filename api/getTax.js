@@ -35,7 +35,6 @@ export default function handler(req, res) {
     // Temporary canvas to measure text size
     const tempCanvas = createCanvas(1, 1);
     const tempContext = tempCanvas.getContext('2d');
-    tempContext.font = `bold ${fontSize}px Arial`;
 
     // Measure text width and approximate height
     const textWidth = tempContext.measureText(text).width;
