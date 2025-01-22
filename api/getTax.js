@@ -1,4 +1,8 @@
-import { createCanvas } from 'canvas'; // ES module import
+import { createCanvas, registerFont } from 'canvas'; // Register font
+import path from 'path';
+
+registerFont(path.resolve('fonts/Roboto-Regular.ttf'), { family: 'Roboto' });
+
 
 export default function handler(req, res) {
 
@@ -35,6 +39,7 @@ export default function handler(req, res) {
     // Temporary canvas to measure text size
     const tempCanvas = createCanvas(1, 1);
     const tempContext = tempCanvas.getContext('2d');
+    tempContext.font = `bold ${fontSize}px Roboto`;
 
     // Measure text width and approximate height
     const textWidth = tempContext.measureText(text).width;
@@ -46,7 +51,7 @@ export default function handler(req, res) {
 
     // Set text properties
     context.fillStyle = '#000000'; // Black text
-    context.font = `bold ${fontSize}px Arial`;
+    context.font = `bold ${fontSize}px Roboto`;
     context.textBaseline = 'top'; // Align text at the top
 
     // Draw text onto the canvas
