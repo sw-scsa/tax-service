@@ -57,9 +57,15 @@ export default function handler(req, res) {
     // Draw text onto the canvas
     context.fillText(text, 0, 0);
 
-    // Set response headers to return an image
-    res.setHeader('Content-Type', 'image/png');
+    const buffer = canvas.toBuffer('image/png');
 
-    // Stream the image back as a response
-    canvas.createPNGStream().pipe(res);
+    // Convert the buffer to a Base64 string
+    const base64Image = `data:image/png;base64,${buffer.toString('base64')}`;
+
+    // Return JSON response with the Base64 image
+    res.setHeader('Content-Type', 'text/plain');
+
+    res.status(200).send(base64Image);
+
+    
 }
