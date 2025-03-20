@@ -59,13 +59,12 @@ export default function handler(req, res) {
 
     const buffer = canvas.toBuffer('image/png');
 
-    // Convert the buffer to a Base64 string
-    const base64Image = `data:image/png;base64,${buffer.toString('base64')}`;
+    // Set the correct headers for image response
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Content-Length', buffer.length);
 
-    // Return JSON response with the Base64 image
-    res.setHeader('Content-Type', 'text/plain');
-
-    res.status(200).send(base64Image);
+    // Send the binary image data directly
+    res.end(buffer);
 
     
 }
